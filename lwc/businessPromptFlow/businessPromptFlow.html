@@ -1,0 +1,47 @@
+<template>
+    <!-- Flow for business Analysis -->
+    <lightning-flow 
+        if:true={flowVisible}
+        flow-api-name="Process_business_data"
+        flow-input-variables={inputVariables}
+        onstatuschange={handleFlowStatus}>
+    </lightning-flow>
+  
+    <!-- Layout for Strategy and Chart -->
+    <lightning-layout multiple-rows>
+        
+        <!-- Left Column: Strategy Information -->
+        <lightning-layout-item size="3" padding="around-small">
+            <lightning-card title="Strategy Chosen">
+                <div class="slds-p-around_medium">
+                    <p><strong>Strategy Id:</strong> {strategyId}</p>
+                    <p><strong>Strategy:</strong> {description}</p>
+  
+                    <br><br>
+  
+                    <lightning-button 
+                        label="Do business Analysis" 
+                        onclick={startFlow}>
+                    </lightning-button>    
+  
+                    <lightning-button 
+                    label="Refresh" 
+                    onclick={handleRefreshCase}>
+                </lightning-button>    
+                    
+                </div>
+            </lightning-card>
+        </lightning-layout-item>
+  
+        <!-- Right Column: Chart -->
+        <lightning-layout-item size="9" padding="around-small">
+            <lightning-card title="Business Risk Analysis">
+                <template if:true={strategyId}>
+                    <c-strategy-business-chart strategy-id={strategyId}></c-strategy-business-chart>
+                </template>
+            </lightning-card>
+        </lightning-layout-item>
+  
+    </lightning-layout>
+  </template>
+  

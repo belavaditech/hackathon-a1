@@ -1,0 +1,35 @@
+<template>
+    <lightning-layout multiple-rows>
+
+        <!-- Left Side: Reasons Card -->
+        <lightning-layout-item size="6" padding="around-small">
+            <lightning-card title="Reasons">
+                <ul class="slds-list_dotted slds-m-left_large">
+                    <template for:each={reasons} for:item="reason">
+                        <li key={reason.aspect}>
+                            <strong>{reason.aspect}:</strong> {reason.reason}
+                        </li>
+                    </template>
+                </ul>
+            </lightning-card>
+        </lightning-layout-item>
+
+        <!-- Right Side: Chart Section -->
+        <lightning-layout-item size="6" padding="around-small">
+            <lightning-card title="Legal Impact">
+                <div class="slds-p-around_medium">
+                    <lightning-button label="Draw Chart" onclick={renderChart}></lightning-button>
+                </div>
+            </lightning-card>
+
+            <lightning-card>
+                <template if:true={legalData.length}>
+                    <div style="height: 300px;">
+                        <canvas></canvas>
+                    </div>
+                </template>
+            </lightning-card>
+        </lightning-layout-item>
+
+    </lightning-layout>
+</template>
